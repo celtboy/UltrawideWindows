@@ -275,7 +275,7 @@ function starSet(workspace) {
   starTracker[activeScreen] = !starTracker[activeScreen];
 
 
-  print(`StarTracker: ${starTracker[activeScreen]}`);
+  // print(`StarTracker: ${starTracker[activeScreen]}`);
   var maxArea = workspace.clientArea(KWin.MaximizeArea, activeWindow); // space size to work in
   var numWindows = 1;
   var stackHeight = 0;
