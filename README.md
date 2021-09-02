@@ -1,6 +1,9 @@
 # UltrawideWindows
+
 Expose useful shortcuts to manage windows in a ultrawide monitor and, in general, in a high resolution monitor.
 This solution is intended to be an easy-to-use middleground between the default behaviour and the tiling approach.
+
+This script based on an original idea by [Luca Moschella]( https://github.com/lucmos/UltrawideWindows.git ).
 
 ![](/docs/preview2.gif)
 ![](/docs/preview.gif)
@@ -8,13 +11,14 @@ This solution is intended to be an easy-to-use middleground between the default 
 # Installation
 
 ```bash
-$ git clone git@github.com:LucaMoschella/UltrawideWindows.git
+$ git clone git@github.com:celtboy/UltrawideWindows.git
 $ cd UltrawideWindows
 $ plasmapkg2 --type=kwinscript -i .
 $ kwin_x11 --replace &
 ```
 
 # Usage
+
 Set the desired shortcuts under `System Settings > Shortcuts > Global Shortcuts > KWin`.
 
 My suggestion is to use the following configuration:
@@ -54,7 +58,6 @@ My suggestion is to use the following configuration:
 | <kbd>ctrl</kbd> + <kbd>Meta</kbd> + <kbd>Numpad5</kbd> | <kbd>UltrawideWindows: Move Window to center-height (4x2 center biased)</kbd> |
 | <kbd>ctrl</kbd> + <kbd>Meta</kbd> + <kbd>Numpad6</kbd> | <kbd>UltrawideWindows: Move Window to right-height (4x2 center biased)</kbd>  |
 
-
 | Shortcuts                           | Commands to fit 2/3 of the width                                       |
 | ----------------------------------- | ---------------------------------------------------------------------- |
 | <kbd>alt</kbd> + <kbd>Numpad7</kbd> | <kbd>UltrawideWindows: Move Window to fit up-left 2/3 width</kbd>      |
@@ -78,6 +81,29 @@ My suggestion is to use the following configuration:
 | <kbd>alt</kbd> + <kbd>Meta</kbd> + <kbd>Numpad5</kbd> | <kbd>UltrawideWindows: Move Window to center-height 2/3 width (center biased)</kbd> |
 | <kbd>alt</kbd> + <kbd>Meta</kbd> + <kbd>Numpad6</kbd> | <kbd>UltrawideWindows: Move Window to right-height 2/3 width (center biased)</kbd>  |
 
+
+| Shortcuts                                              | Commands in 4x2 grid  (cols, rows)                             |
+| ------------------------------------------------------ | -------------------------------------------------------------- |
+| <kbd>Meta</kbd> + <kbd>Ctrl</kbd> + <kbd>Numpad7</kbd> | <kbd>UltrawideWindows: Move Window Top Row - Left</kbd>        |
+| <kbd>Meta</kbd> + <kbd>Ctrl</kbd> + <kbd>Numpad8</kbd> | <kbd>UltrawideWindows: Move Window to Top Row</kbd>            |
+| <kbd>Meta</kbd> + <kbd>Ctrl</kbd> + <kbd>Numpad9</kbd> | <kbd>UltrawideWindows: Move Window Top Row - Right</kbd>       |
+| <kbd>Meta</kbd> + <kbd>Ctrl</kbd> + <kbd>Numpad1</kbd> | <kbd>UltrawideWindows: Move Window to Bottom Row - Left</kbd>  |
+| <kbd>Meta</kbd> + <kbd>Ctrl</kbd> + <kbd>Numpad2</kbd> | <kbd>UltrawideWindows: Move Window to Bottom Row</kbd>         |
+| <kbd>Meta</kbd> + <kbd>Ctrl</kbd> + <kbd>Numpad3</kbd> | <kbd>UltrawideWindows: Move Window to Bottom Row - Right</kbd> |
+
+| Shortcuts                                              | Commands in 4x3 grid (cols, rows)                           |
+| ------------------------------------------------------ | ----------------------------------------------------------- |
+| <kbd>Meta</kbd> + <kbd>alt</kbd> + <kbd>Numpad7</kbd>  | <kbd>UltrawideWindows: Move Top Row Window - Left</kbd>     |
+| <kbd>Meta</kbd> + <kbd>alt</kbd> + <kbd>Numpad8</kbd>  | <kbd>UltrawideWindows: Move Window to Top Row</kbd>         |
+| <kbd>Meta</kbd> + <kbd>alt</kbd> + <kbd>Numpad9</kbd>  | <kbd>UltrawideWindows: Move Top Row Window - Right</kbd>    |
+| <kbd>Meta</kbd> + <kbd>alt</kbd> + <kbd>Numpad4</kbd>  | <kbd>UltrawideWindows: Move Center Row Window - Left</kbd>  |
+| <kbd>Meta</kbd> + <kbd>alt</kbd> + <kbd>Numpad5</kbd>  | <kbd>UltrawideWindows: Move Window to Center Row</kbd>      |
+| <kbd>Meta</kbd> + <kbd>alt</kbd> + <kbd>Numpad6</kbd>  | <kbd>UltrawideWindows: Move Center Row Window - Right</kbd> |
+| <kbd>Meta</kbd> + <kbd>alt</kbd> + <kbd>Numpad1</kbd>  | <kbd>UltrawideWindows: Move Bottom Row Window - Leftt</kbd> |
+| <kbd>Meta</kbd> + <kbd>alt</kbd> + <kbd>Numpad2</kbd>  | <kbd>UltrawideWindows: Move Window to BOttom Row</kbd>      |
+| <kbd>Meta</kbd> + <kbd>alt</kbd> + <kbd>Numpad3</kbd>  | <kbd>UltrawideWindows: Move Bottom Row Window - Right</kbd> |
+
+
 | Shortcuts                                              | General commands (easy to use)                       |
 | ------------------------------------------------------ | ---------------------------------------------------- |
 | <kbd>Meta</kbd> + <kbd>Numpad0</kbd>                   | <kbd>UltrawideWindows: Maximize Window</kbd>         |
@@ -87,20 +113,17 @@ My suggestion is to use the following configuration:
 | <kbd>Alt</kbd> + <kbd>Meta</kbd> + <kbd>Numpad0</kbd>  | <kbd>UltrawideWindows: Maximize Window (copy4)</kbd> |
 | <kbd>Alt</kbd> + <kbd>Numpad5</kbd>                    | <kbd>UltrawideWindows: Center Window</kbd>           |
 | <kbd>Ctrl</kbd> + <kbd>Numpad5</kbd>                   | <kbd>UltrawideWindows: Center Window (copy)</kbd>    |
-
-
-
-
+| <kbd>Meta</kbd> + <kbd>Numpad</kbd> + <kbd>\*</kbd>    | <kbd>UltrawideWindows: Tile All with focus </kbd>    |
 
 ##### Notes
+
 The standard behaviour of going to the previous position if the window is already in the correct position causes conflicts.
 Using only `Ultrawide` shortcuts, avoids these conflicts. However:
-* The animations are lost.
-* If maximized, a window does not go back to the previous position when maximizing it again. If for you it is a must-have, the default `maximize` doesn't work so bad.
 
+- The animations are lost.
+- If maximized, a window does not go back to the previous position when maximizing it again. If for you it is a must-have, the default `maximize` doesn't work so bad.
 
 # Update
-
 
 ```bash
 $ cd UltrawideWindows

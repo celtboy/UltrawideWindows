@@ -145,6 +145,7 @@ if (DEBUG) {
 }
 
 
+
 /**
  *
  * @param {*} workspace
@@ -257,6 +258,120 @@ function center(workspace) {
 }
 
 
+
+// print(workspace.clientList());
+
+// starTracker is a stepper track for screens
+var starTracker=[0];
+for (var i = 1; i <= workspace.numScreens; i++) {
+    starTracker.push(0);
+}
+
+function starSet(workspace) {
+
+  var activeWindow = workspace.activeClient; // active window
+  var activeScreen = activeWindow.screen; // screen number
+
+  starTracker[activeScreen] = !starTracker[activeScreen];
+
+
+  print(`StarTracker: ${starTracker[activeScreen]}`);
+  var maxArea = workspace.clientArea(KWin.MaximizeArea, activeWindow); // space size to work in
+  var numWindows = 1;
+  var stackHeight = 0;
+  var objCords;
+  var uPadding = 10;
+  var screenWindows = [];
+  var leftStackHeight = 0;
+  var rightStackHeight = 0;
+  var leftRight = 1;
+
+
+  // build an array of tiles on the display of the active window
+  workspace.clientList().forEach(function(cw) {
+      if (cw.screen === activeScreen && cw.moveable && cw !== activeWindow) {
+          screenWindows.push(cw);
+      }
+  });
+
+  numWindows = screenWindows.length;
+  numTiles = numWindows;
+  // print(`Display: ${workspace.clientArea(KWin.MaximizeArea,1,workspace.activeClient)}`);
+  // print(`Width & Height: ${workspace.workspaceWidth},${workspace.workspaceHeight}`);
+
+
+  // define the geometry of our tiles
+  function resizeCoords() {
+
+      let obj = {};
+      obj.leftX = maxArea.x
+      obj.leftY = maxArea.y
+      obj.centerX = maxArea.x + Math.round(maxArea.width / 4 + uPadding/2);
+      obj.centerY = maxArea.y
+      obj.rightX = maxArea.x + Math.round(maxArea.width / 4 * 3 + uPadding);
+      obj.rightY = maxArea.y
+      obj.tileWidth = Math.round(maxArea.width / 4 - uPadding);
+      obj.leftTileHeight = Math.round(maxArea.height / Math.round(numTiles / 2) - uPadding);
+      obj.rightTileHeight = Math.round(maxArea.height / Math.round(numTiles / 2) - uPadding);
+      obj.centerWidth = Math.round(maxArea.width / 2) - uPadding;
+      obj.centerHeight = maxArea.height;
+
+      // if odd number of windows, adjust windows on smaller side
+      if (numTiles % 2 !== 0) {
+          if (starTracker[activeScreen]) {
+              obj.rightTileHeight = Math.round(maxArea.height / Math.round((numTiles-1)/2) - uPadding);
+          } else {
+              obj.leftTileHeight = Math.round(maxArea.height / Math.round((numTiles-1)/2) - uPadding);
+          }
+      }
+      return obj;
+  }
+
+  objCords = resizeCoords();
+
+
+  rsize(activeWindow,  {
+                x:      objCords.centerX,
+                y:      objCords.centerY,
+                width:  objCords.centerWidth,
+                height: objCords.centerHeight}
+              );
+ 
+
+  leftRight = (starTracker[activeScreen]) ? 1: 0; // allow stack size growth L/R 
+
+  
+  for (var x = 0; x < screenWindows.length; x++) {
+      let cw = screenWindows[x];
+      let adjustment = (x<=1) ? 0 : uPadding*x;
+
+
+      if (leftRight % 2 === 0) {
+          // left stack
+          rsize(cw,{x:objCords.leftX, y:objCords.leftY + (objCords.leftTileHeight*leftStackHeight + adjustment), width: objCords.tileWidth, height: objCords.leftTileHeight});      
+          leftStackHeight++;
+      } else {
+          // right stack
+          rsize(cw,{x:objCords.rightX, y:objCords.rightY + (objCords.rightTileHeight*rightStackHeight + adjustment), width: objCords.tileWidth, height: objCords.rightTileHeight});
+
+          rightStackHeight++;
+      }
+      leftRight++;
+      if (numTiles%2 !== 0 && x==1) {
+        leftRight++;
+      }
+  };
+
+  function rsize(client, geo) {
+      client.geometry = geo;
+  }
+}
+
+
+
+
+
+
 if (!DEBUG) {
   /**
     * Register 9 shortcuts, using ALT + Meta + Keypad. Divide screen in 3 rows, 4 columns.
@@ -322,6 +437,9 @@ if (!DEBUG) {
 
 
 
+  registerShortcut("TileWindowsUW","UltrawideWindows: Tile Screen with Main Focus (n1n)","Meta+Num+*",function() {
+    starSet(workspace);
+  });
 
 
 

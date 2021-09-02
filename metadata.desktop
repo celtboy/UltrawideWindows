@@ -6,10 +6,10 @@ Icon=preferences-system-windows-script-test
 X-Plasma-API=javascript
 X-Plasma-MainScript=code/main.js
 
-X-KDE-PluginInfo-Author=Luca Moschella;celtboy
+X-KDE-PluginInfo-Author=Luca Moschella;John Collins
 X-KDE-PluginInfo-Email=nopaste94@gmail.com;celtboy@gmail.com
 X-KDE-PluginInfo-Name=ultrawidewindows
-X-KDE-PluginInfo-Version=4.1
+X-KDE-PluginInfo-Version=4.2
 X-KDE-PluginInfo-EnabledByDefault=true
 
 X-KDE-PluginInfo-Depends=

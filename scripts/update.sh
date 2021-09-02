@@ -3,7 +3,6 @@ killall kwin
 DISPLAY=:0 kwin
 
 sed -i '/UltrawideWindows/d' ~/.config/kglobalshortcutsrc
-sed -i '/JDC/d' ~/.config/kglobalshortcutsrc
 kquitapp5 kglobalaccel && sleep 2s && kglobalaccel5 &
 kwin &
 plasmapkg2 --type=kwinscript -r .
